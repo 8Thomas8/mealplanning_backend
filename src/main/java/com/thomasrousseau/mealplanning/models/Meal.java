@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 import javax.persistence.*;
+import java.util.Collection;
 
 /**
  * Define the Moment object.
@@ -26,4 +27,16 @@ public class Meal extends EntityBase {
      */
     @Column(name = MealContract.COL_NAME, nullable = false)
     private String name;
+
+    /**
+     * Collection of accompaniments from Accompaniment relation.
+     */
+    @ManyToMany
+    private Collection<Accompaniment> accompaniments;
+
+    /**
+     * Collection of meals from Meal relation.
+     */
+    @ManyToMany
+    private Collection<Meal> meals;
 }
