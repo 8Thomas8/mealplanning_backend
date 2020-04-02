@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 import javax.persistence.*;
+import java.util.Collection;
 
 /**
  * Define the Moment object.
@@ -33,4 +34,10 @@ public class Moment extends EntityBase {
      */
     @Column(name = MomentContract.COL_GUEST_NUMBER, nullable = false)
     private int guestNumber;
+
+    /**
+     * Collection of meals from the association with Meal.
+     */
+    @ManyToMany
+    private Collection<Meal> meals;
 }
