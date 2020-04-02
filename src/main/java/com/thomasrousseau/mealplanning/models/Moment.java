@@ -1,9 +1,7 @@
 package com.thomasrousseau.mealplanning.models;
 
-import com.thomasrousseau.mealplanning.database.contracts.DayContract;
 import com.thomasrousseau.mealplanning.database.contracts.MomentContract;
 import com.thomasrousseau.mealplanning.models.base.EntityBase;
-import com.thomasrousseau.mealplanning.models.enumerations.DayName;
 import com.thomasrousseau.mealplanning.models.enumerations.MomentName;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;

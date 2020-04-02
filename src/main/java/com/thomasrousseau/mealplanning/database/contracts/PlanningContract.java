@@ -21,4 +21,7 @@ public class PlanningContract {
      * The name of the column of the user's id.
      */
     public static final String COL_USER_ID = "user_id";
+
+    private PlanningContract() {
+    }
 }

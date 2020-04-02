@@ -34,4 +34,7 @@ public class UserContract {
      * The role column name.
      */
     public static final String COL_ROLE = "role";
+
+    private UserContract() {
+    }
 }
