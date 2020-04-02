@@ -26,7 +26,6 @@ public class Moment extends EntityBase {
      */
     @Column(name = MomentContract.COL_NAME, nullable = false)
     @Enumerated(EnumType.STRING)
-
     private MomentName name;
 
     /**
