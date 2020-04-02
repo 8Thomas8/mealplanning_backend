@@ -24,7 +24,8 @@ public class Day extends EntityBase {
     /**
      * The name of the planning.
      */
-    @Column(name = DayContract.COL_NAME, nullable = false, length = 50, unique = true)
+    @Column(name = DayContract.COL_NAME, nullable = false)
+    @Enumerated(EnumType.STRING)
     private DayName name;
 
     /**

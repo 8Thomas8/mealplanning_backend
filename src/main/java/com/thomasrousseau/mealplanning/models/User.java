@@ -41,6 +41,7 @@ public class User extends EntityBase {
      * Role of the user.
      */
     @Column(name = UserContract.COL_ROLE)
+    @Enumerated(EnumType.STRING)
     private UserRole role = UserRole.USER;
 
     /**
