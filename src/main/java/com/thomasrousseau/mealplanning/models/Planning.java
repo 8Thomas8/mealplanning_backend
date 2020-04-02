@@ -17,7 +17,7 @@ import java.util.Collection;
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
-@AttributeOverride(name="id", column = @Column(name = PlanningContract.COL_ID))
+@AttributeOverride(name = "id", column = @Column(name = PlanningContract.COL_ID))
 public class Planning extends EntityBase {
 
     /**
@@ -30,7 +30,7 @@ public class Planning extends EntityBase {
      * User id from the association.
      */
     @ManyToOne
-    @JoinColumn(name=PlanningContract.COL_USER_ID)
+    @JoinColumn(name = PlanningContract.COL_USER_ID)
     private User user;
 
     /**
