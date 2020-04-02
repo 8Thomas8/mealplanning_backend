@@ -5,10 +5,8 @@ import com.thomasrousseau.mealplanning.models.base.EntityBase;
 import com.thomasrousseau.mealplanning.models.enumerations.UserRole;
 import lombok.*;
 
-import javax.persistence.AttributeOverride;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.Collection;
 
 /**
  * Define the User object.
@@ -44,4 +42,10 @@ public class User extends EntityBase {
      */
     @Column(name = UserContract.COL_ROLE)
     private UserRole role = UserRole.USER;
+
+    /**
+     * Association with a Planning object.
+     */
+    @OneToMany(mappedBy = "user")
+    private Collection<Planning> planning;
 }
