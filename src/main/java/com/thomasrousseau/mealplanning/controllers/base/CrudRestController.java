@@ -36,14 +36,6 @@ public interface CrudRestController<T, ID> {
     void deleteAll();
 
     /**
-     * Create an object.
-     *
-     * @param item: it's the object to create.
-     * @return is an object with T type.
-     */
-    T create(T item);
-
-    /**
      * Return a number of object of a type.
      *
      * @return is a number of counted objects.
