@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 import javax.persistence.*;
+import java.util.Collection;
 
 /**
  * Define the Planning object.
@@ -32,4 +33,10 @@ public class Planning extends EntityBase {
     @ManyToOne
     @JoinColumn(name=PlanningContract.COL_USER_ID)
     private User user;
+
+    /**
+     * Days from the association with Day.
+     */
+    @ManyToMany
+    private Collection<Day> days;
 }
