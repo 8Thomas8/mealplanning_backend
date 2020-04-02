@@ -7,13 +7,11 @@ import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
-import javax.persistence.AttributeOverride;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.Collection;
 
 /**
- * Define the Planning object.
+ * Define the Day object.
  */
 @Entity
 @Table(name = DayContract.TABLE)
@@ -28,4 +26,10 @@ public class Day extends EntityBase {
      */
     @Column(name = DayContract.COL_NAME, nullable = false, length = 50, unique = true)
     private DayName name;
+
+    /**
+     * Moments from the association with Moment.
+     */
+    @ManyToMany
+    private Collection<Moment> moments;
 }
