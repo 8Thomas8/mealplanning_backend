@@ -14,7 +14,7 @@ import javax.persistence.MappedSuperclass;
 @MappedSuperclass
 @Getter
 @Setter
-public abstract class EntityBase {
+public abstract class EntityBase implements ResourceDb<Integer> {
     /**
      * The id attribute, for each entity.
      */
