@@ -1,0 +1,61 @@
+package com.thomasrousseau.mealplanning.controllers.base;
+
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
+
+import java.util.Optional;
+
+public interface CrudRestController<T, ID> {
+    /**
+     * Get all method.
+     *
+     * @param pageable add page gestion.
+     * @return is a result with pagination.
+     */
+    Page<T> getAll(@PageableDefault() final Pageable pageable);
+
+    /**
+     * Get by id.
+     *
+     * @param id: the id of the object to get.
+     * @return is an object.
+     */
+    Optional<T> getById(ID id);
+
+    /**
+     * Delete an object by id.
+     *
+     * @param id: the id of the object to delete.
+     */
+    void deleteById(ID id);
+
+    /**
+     * Delete all the objects.
+     */
+    void deleteAll();
+
+    /**
+     * Return a number of object of a type.
+     *
+     * @return is a number of counted objects.
+     */
+    Long count();
+
+    /**
+     * Create an object.
+     *
+     * @param item is the object to save.
+     * @return is the object saved.
+     */
+    T create(T item);
+
+    /**
+     * Update a saved object.
+     *
+     * @param item is the new item to save.
+     * @param id   is the id of the object to update.
+     * @return return is the object, updated.
+     */
+    T update(T item, ID id);
+}
