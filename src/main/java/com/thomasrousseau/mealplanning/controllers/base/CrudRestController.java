@@ -43,12 +43,12 @@ public interface CrudRestController<T, ID> {
     Long count();
 
     /**
-     * Save an object.
+     * Create an object.
      *
      * @param item is the object to save.
      * @return is the object saved.
      */
-    T save(T item);
+    T create(T item);
 
     /**
      * Update a saved object.
