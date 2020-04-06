@@ -34,7 +34,7 @@ public class Day extends EntityBase {
     /**
      * Moments from the association with Moment.
      */
-    @ManyToMany
+    @OneToMany
     @JsonProperty(value = "moments")
     private Collection<Moment> moments;
 }

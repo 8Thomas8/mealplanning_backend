@@ -30,17 +30,9 @@ public class Planning extends EntityBase {
     private String name;
 
     /**
-     * User id from the association.
-     */
-    @JsonProperty(value = PlanningContract.COL_USER_ID)
-    @ManyToOne
-    @JoinColumn(name = PlanningContract.COL_USER_ID)
-    private User user;
-
-    /**
      * Days from the association with Day.
      */
     @JsonProperty(value = "days")
-    @ManyToMany
+    @OneToMany
     private Collection<Day> days;
 }

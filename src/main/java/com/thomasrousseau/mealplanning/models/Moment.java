@@ -40,7 +40,7 @@ public class Moment extends EntityBase {
     /**
      * Collection of meals from the association with Meal.
      */
-    @ManyToMany
+    @OneToMany
     @JsonProperty(value = "meals")
     private Collection<Meal> meals;
 }

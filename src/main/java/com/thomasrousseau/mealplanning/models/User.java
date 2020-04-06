@@ -1,5 +1,6 @@
 package com.thomasrousseau.mealplanning.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.thomasrousseau.mealplanning.database.contracts.PlanningContract;
 import com.thomasrousseau.mealplanning.database.contracts.UserContract;
@@ -53,7 +54,7 @@ public class User extends EntityBase {
     /**
      * Association with a Planning object.
      */
-    @JsonProperty(value = PlanningContract.TABLE)
-    @OneToMany(mappedBy = "user")
+    @OneToMany()
+    @JsonProperty(value = "plannings")
     private Collection<Planning> planning;
 }
