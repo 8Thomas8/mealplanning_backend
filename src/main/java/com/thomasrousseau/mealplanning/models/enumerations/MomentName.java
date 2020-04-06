@@ -1,8 +1,24 @@
 package com.thomasrousseau.mealplanning.models.enumerations;
 
+import com.fasterxml.jackson.annotation.JsonValue;
+import lombok.Getter;
+import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
+
 /**
  * Enumeration of moment's name.
  */
+@RequiredArgsConstructor
+@Getter
 public enum MomentName {
-    MIDI, SOIR
+    MIDI(0, "Midi"),
+    SOIR(1, "Soir");
+
+
+    @NonNull
+    private final int value;
+
+    @NonNull
+    @JsonValue
+    private final String label;
 }

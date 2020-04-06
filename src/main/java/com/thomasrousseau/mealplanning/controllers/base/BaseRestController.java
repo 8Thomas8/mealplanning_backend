@@ -1,15 +1,12 @@
 package com.thomasrousseau.mealplanning.controllers.base;
 
-import com.thomasrousseau.mealplanning.models.User;
 import com.thomasrousseau.mealplanning.models.base.ResourceDb;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.rest.webmvc.IncomingRequest;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.io.IOException;
 import java.util.Optional;
 
 public abstract class BaseRestController<T extends ResourceDb<ID>, ID>
@@ -66,7 +63,6 @@ public abstract class BaseRestController<T extends ResourceDb<ID>, ID>
     }
 
     protected T save(final T item) {
-        System.out.println(item.toString());
         return repository.save(item);
     }
 }

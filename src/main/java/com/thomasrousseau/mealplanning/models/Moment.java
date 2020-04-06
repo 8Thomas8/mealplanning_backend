@@ -1,5 +1,6 @@
 package com.thomasrousseau.mealplanning.models;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.thomasrousseau.mealplanning.database.contracts.MomentContract;
 import com.thomasrousseau.mealplanning.models.base.EntityBase;
 import com.thomasrousseau.mealplanning.models.enumerations.MomentName;
@@ -26,17 +27,20 @@ public class Moment extends EntityBase {
      */
     @Column(name = MomentContract.COL_NAME, nullable = false)
     @Enumerated(EnumType.STRING)
+    @JsonProperty(value = MomentContract.COL_NAME)
     private MomentName name;
 
     /**
      * The guest number of the Moment.
      */
     @Column(name = MomentContract.COL_GUEST_NUMBER, nullable = false)
+    @JsonProperty(value = MomentContract.COL_GUEST_NUMBER)
     private int guestNumber;
 
     /**
      * Collection of meals from the association with Meal.
      */
-    @ManyToMany
+    @OneToMany
+    @JsonProperty(value = "meals")
     private Collection<Meal> meals;
 }

@@ -1,5 +1,6 @@
 package com.thomasrousseau.mealplanning.models;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.thomasrousseau.mealplanning.database.contracts.PlanningContract;
 import com.thomasrousseau.mealplanning.models.base.EntityBase;
 import lombok.AllArgsConstructor;
@@ -23,19 +24,14 @@ public class Planning extends EntityBase {
     /**
      * The name of the planning.
      */
+    @JsonProperty(value = PlanningContract.COL_NAME)
     @Column(name = PlanningContract.COL_NAME, nullable = false, length = 50, unique = true)
     private String name;
 
     /**
-     * User id from the association.
-     */
-    @ManyToOne
-    @JoinColumn(name = PlanningContract.COL_USER_ID)
-    private User user;
-
-    /**
      * Days from the association with Day.
      */
-    @ManyToMany
+    @JsonProperty(value = "days")
+    @OneToMany
     private Collection<Day> days;
 }
