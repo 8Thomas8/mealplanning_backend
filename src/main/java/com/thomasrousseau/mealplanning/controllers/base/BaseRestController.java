@@ -1,6 +1,5 @@
 package com.thomasrousseau.mealplanning.controllers.base;
 
-import com.thomasrousseau.mealplanning.models.User;
 import com.thomasrousseau.mealplanning.models.base.ResourceDb;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -64,7 +63,6 @@ public abstract class BaseRestController<T extends ResourceDb<ID>, ID>
     }
 
     protected T save(final T item) {
-        System.out.println(item.toString());
         return repository.save(item);
     }
 }

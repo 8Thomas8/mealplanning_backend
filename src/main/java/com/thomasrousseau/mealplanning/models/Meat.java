@@ -1,16 +1,12 @@
 package com.thomasrousseau.mealplanning.models;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.thomasrousseau.mealplanning.database.contracts.AccompanimentContract;
-import com.thomasrousseau.mealplanning.database.contracts.MealContract;
 import com.thomasrousseau.mealplanning.database.contracts.MeatContract;
-import com.thomasrousseau.mealplanning.database.contracts.MomentContract;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 import javax.persistence.*;
-import java.util.Collection;
 
 /**
  * Define the Day object.

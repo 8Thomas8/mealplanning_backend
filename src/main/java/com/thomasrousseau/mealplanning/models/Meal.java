@@ -2,10 +2,7 @@ package com.thomasrousseau.mealplanning.models;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.thomasrousseau.mealplanning.database.contracts.MealContract;
-import com.thomasrousseau.mealplanning.database.contracts.MeatContract;
-import com.thomasrousseau.mealplanning.database.contracts.MomentContract;
 import com.thomasrousseau.mealplanning.models.base.EntityBase;
-import com.thomasrousseau.mealplanning.models.enumerations.MomentName;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import lombok.ToString;

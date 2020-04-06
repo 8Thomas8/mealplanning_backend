@@ -1,8 +1,6 @@
 package com.thomasrousseau.mealplanning.models;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.thomasrousseau.mealplanning.database.contracts.PlanningContract;
 import com.thomasrousseau.mealplanning.database.contracts.UserContract;
 import com.thomasrousseau.mealplanning.models.base.EntityBase;
 import com.thomasrousseau.mealplanning.models.enumerations.UserRole;
