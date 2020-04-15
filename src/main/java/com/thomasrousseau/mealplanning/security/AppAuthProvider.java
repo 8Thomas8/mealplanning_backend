@@ -1,6 +1,8 @@
 package com.thomasrousseau.mealplanning.security;
 
 import com.thomasrousseau.mealplanning.security.services.UserService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -13,6 +15,9 @@ public class AppAuthProvider extends DaoAuthenticationProvider {
     @Autowired
     UserService userDetailsService;
 
+    private static Logger logger = LoggerFactory.getLogger(AppAuthProvider.class);
+
+
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
         UsernamePasswordAuthenticationToken auth = (UsernamePasswordAuthenticationToken) authentication;
@@ -23,14 +28,13 @@ public class AppAuthProvider extends DaoAuthenticationProvider {
         UserDetails user = userDetailsService.loadUserByUsername(name);
 
         if (userDetailsService.comparePassword(password, user.getPassword()) ) {
-            System.out.println("Utilisateur connecté" + " || username: " + user.getUsername());
+            logger.info("Utilisateur connecté" + " || username: " + user.getUsername());
             return new UsernamePasswordAuthenticationToken(user, null, user.getAuthorities());
         }
 
-        System.out.println("Erreur de connexion" + " || username: " + user.getUsername());
+        logger.info("Erreur de connexion" + " || username: " + user.getUsername());
 
-        throw new BadCredentialsException("Username/Password does not match for " + auth.getPrincipal());
-
+        throw new BadCredentialsException("Information de connexion erronées");
     }
     @Override
     public boolean supports(Class<?> authentication) {
