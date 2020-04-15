@@ -1,5 +1,6 @@
 package com.thomasrousseau.mealplanning.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.thomasrousseau.mealplanning.database.contracts.UserContract;
 import com.thomasrousseau.mealplanning.models.base.EntityBase;
@@ -43,6 +44,7 @@ public class User extends EntityBase implements Serializable, UserDetails {
      */
     @JsonProperty(value = UserContract.COL_PASSWORD)
     @Column(name = UserContract.COL_PASSWORD, nullable = false)
+    @JsonIgnore
     private String password;
 
     /**

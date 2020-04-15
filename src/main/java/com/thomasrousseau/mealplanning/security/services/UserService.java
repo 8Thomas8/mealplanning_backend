@@ -2,7 +2,6 @@ package com.thomasrousseau.mealplanning.security.services;
 
 import com.thomasrousseau.mealplanning.database.repositories.UserRepository;
 import com.thomasrousseau.mealplanning.models.User;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -25,7 +24,7 @@ public class UserService implements UserDetailsService {
 
         Objects.requireNonNull(username);
         User user = userRepository.findUserWithName(username)
-                .orElseThrow(() -> new UsernameNotFoundException("User not found"));
+                .orElseThrow(() -> new UsernameNotFoundException("Utilisateur non trouvé"));
 
         return user;
     }
