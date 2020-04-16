@@ -11,6 +11,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.authentication.Http403ForbiddenEntryPoint;
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler;
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler;
@@ -57,6 +58,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         @Override
         public void onAuthenticationSuccess(HttpServletRequest request,
                                             HttpServletResponse response, Authentication authentication) {
+            UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+            logger.info("Utilisateur connecté" + " || username: " + userDetails.getUsername());
             response.setStatus(HttpServletResponse.SC_OK);
         }
     }
@@ -65,6 +68,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         @Override
         public void onLogoutSuccess(HttpServletRequest request, HttpServletResponse response,
                                     Authentication authentication) {
+            UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+            logger.info("Utilisateur déconnecté" + " || username: " + userDetails.getUsername());
             response.setStatus(HttpServletResponse.SC_OK);
         }
     }

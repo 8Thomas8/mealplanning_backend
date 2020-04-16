@@ -28,7 +28,6 @@ public class AppAuthProvider extends DaoAuthenticationProvider {
         UserDetails user = userDetailsService.loadUserByUsername(name);
 
         if (userDetailsService.comparePassword(password, user.getPassword()) ) {
-            logger.info("Utilisateur connecté" + " || username: " + user.getUsername());
             return new UsernamePasswordAuthenticationToken(user, null, user.getAuthorities());
         }
 
