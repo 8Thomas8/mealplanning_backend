@@ -16,6 +16,9 @@ import org.springframework.security.web.authentication.Http403ForbiddenEntryPoin
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler;
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler;
 import org.springframework.security.web.authentication.logout.SimpleUrlLogoutSuccessHandler;
+import org.springframework.security.web.csrf.CsrfFilter;
+import org.springframework.security.web.csrf.CsrfTokenRepository;
+import org.springframework.security.web.csrf.HttpSessionCsrfTokenRepository;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -23,6 +26,9 @@ import javax.servlet.http.HttpServletResponse;
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
+
+    private static final String[] CSRF_IGNORE = {"/login"};
+
     @Autowired
     UserService userDetailsService;
 
@@ -33,8 +39,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.csrf()
-                .disable()
+        http
+                .csrf()
+                .ignoringAntMatchers(CSRF_IGNORE)
+                .csrfTokenRepository(csrfTokenRepository())
+                .and()
+                .addFilterAfter(new CustomCsrfFilter(), CsrfFilter.class)
                 .exceptionHandling()
                 .authenticationEntryPoint(new Http403ForbiddenEntryPoint() {
                 })
@@ -72,6 +82,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             logger.info("Utilisateur déconnecté" + " || username: " + userDetails.getUsername());
             response.setStatus(HttpServletResponse.SC_OK);
         }
+    }
+
+    private CsrfTokenRepository csrfTokenRepository() {
+        HttpSessionCsrfTokenRepository repository = new HttpSessionCsrfTokenRepository();
+        repository.setHeaderName(CustomCsrfFilter.CSRF_COOKIE_NAME);
+        return repository;
     }
 
     @Bean
