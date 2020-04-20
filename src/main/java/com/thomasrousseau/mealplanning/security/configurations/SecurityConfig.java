@@ -27,7 +27,7 @@ import javax.servlet.http.HttpServletResponse;
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-    private static final String[] CSRF_IGNORE = {"/login"};
+    private static final String[] CSRF_IGNORE = {"/api/login"};
 
     @Autowired
     UserService userDetailsService;
@@ -51,12 +51,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .authenticationProvider(getProvider())
                 .formLogin()
-                .loginProcessingUrl("/login")
+                .loginProcessingUrl("/api/login")
                 .successHandler(new AuthentificationLoginSuccessHandler())
                 .failureHandler(new SimpleUrlAuthenticationFailureHandler())
                 .and()
                 .logout()
-                .logoutUrl("/logout")
+                .logoutUrl("/api/logout")
                 .logoutSuccessHandler(new AuthentificationLogoutSuccessHandler())
                 .invalidateHttpSession(true)
                 .and()

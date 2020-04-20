@@ -13,7 +13,7 @@ public class AuthController {
     @Autowired
     private UserService userService;
 
-    @GetMapping("/getLogged")
+    @GetMapping("/api/getLogged")
     public UserDetails loginSuccess(Principal principal) {
         return userService.loadUserByUsername(principal.getName());
     }
