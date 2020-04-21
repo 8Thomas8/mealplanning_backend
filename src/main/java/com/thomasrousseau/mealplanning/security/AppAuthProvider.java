@@ -11,6 +11,9 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.UserDetails;
 
+/**
+ * Provider for authentication.
+ */
 public class AppAuthProvider extends DaoAuthenticationProvider {
     @Autowired
     UserService userDetailsService;
@@ -18,6 +21,12 @@ public class AppAuthProvider extends DaoAuthenticationProvider {
     private static Logger logger = LoggerFactory.getLogger(AppAuthProvider.class);
 
 
+    /**
+     * Do the authentication of the user.
+     * @param authentication are credentials from the client.
+     * @return is the result of the auth.
+     * @throws AuthenticationException
+     */
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
         UsernamePasswordAuthenticationToken auth = (UsernamePasswordAuthenticationToken) authentication;
