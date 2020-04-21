@@ -16,9 +16,7 @@ import org.springframework.security.web.authentication.Http403ForbiddenEntryPoin
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler;
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler;
 import org.springframework.security.web.authentication.logout.SimpleUrlLogoutSuccessHandler;
-import org.springframework.security.web.csrf.CsrfFilter;
-import org.springframework.security.web.csrf.CsrfTokenRepository;
-import org.springframework.security.web.csrf.HttpSessionCsrfTokenRepository;
+import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -27,7 +25,7 @@ import javax.servlet.http.HttpServletResponse;
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-    private static final String[] CSRF_IGNORE = {"/api/login"};
+    private static final String[] CSRF_IGNORE = {"/api/getToken"};
 
     @Autowired
     UserService userDetailsService;
@@ -41,27 +39,26 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .csrf()
-                .ignoringAntMatchers(CSRF_IGNORE)
-                .csrfTokenRepository(csrfTokenRepository())
+                    .ignoringAntMatchers(CSRF_IGNORE)
+                    .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
                 .and()
-                .addFilterAfter(new CustomCsrfFilter(), CsrfFilter.class)
                 .exceptionHandling()
-                .authenticationEntryPoint(new Http403ForbiddenEntryPoint() {
-                })
+                    .authenticationEntryPoint(new Http403ForbiddenEntryPoint())
                 .and()
-                .authenticationProvider(getProvider())
+                    .authenticationProvider(getProvider())
                 .formLogin()
-                .loginProcessingUrl("/api/login")
-                .successHandler(new AuthentificationLoginSuccessHandler())
-                .failureHandler(new SimpleUrlAuthenticationFailureHandler())
+                    .loginProcessingUrl("/api/login")
+                    .successHandler(new AuthentificationLoginSuccessHandler())
+                    .failureHandler(new SimpleUrlAuthenticationFailureHandler())
                 .and()
                 .logout()
-                .logoutUrl("/api/logout")
-                .logoutSuccessHandler(new AuthentificationLogoutSuccessHandler())
-                .invalidateHttpSession(true)
+                    .logoutUrl("/api/logout")
+                    .logoutSuccessHandler(new AuthentificationLogoutSuccessHandler())
+                    .invalidateHttpSession(true)
                 .and()
-                .authorizeRequests()
-                .anyRequest().authenticated();
+                    .authorizeRequests()
+                    .antMatchers("/api/getToken").permitAll()
+                    .anyRequest().authenticated();
     }
 
     private class AuthentificationLoginSuccessHandler extends SimpleUrlAuthenticationSuccessHandler {
@@ -78,16 +75,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         @Override
         public void onLogoutSuccess(HttpServletRequest request, HttpServletResponse response,
                                     Authentication authentication) {
-            UserDetails userDetails = (UserDetails) authentication.getPrincipal();
-            logger.info("Utilisateur déconnecté" + " || username: " + userDetails.getUsername());
-            response.setStatus(HttpServletResponse.SC_OK);
+            if (authentication != null) {
+                UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+                logger.info("Utilisateur déconnecté" + " || username: " + userDetails.getUsername());
+                response.setStatus(HttpServletResponse.SC_OK);
+            } else {
+                response.setStatus(HttpServletResponse.SC_FORBIDDEN);
+            }
         }
-    }
-
-    private CsrfTokenRepository csrfTokenRepository() {
-        HttpSessionCsrfTokenRepository repository = new HttpSessionCsrfTokenRepository();
-        repository.setHeaderName(CustomCsrfFilter.CSRF_COOKIE_NAME);
-        return repository;
     }
 
     @Bean
