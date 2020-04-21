@@ -18,7 +18,7 @@ public class UserContract {
     /**
      * The name column name.
      */
-    public static final String COL_NAME = "name";
+    public static final String COL_USERNAME = "username";
 
     /**
      * The email column name.
