@@ -10,6 +10,9 @@ import org.springframework.stereotype.Service;
 
 import java.util.Objects;
 
+/**
+ * User service, for getting details of the logged user and to compare credientials with the database.
+ */
 @Service
 public class UserService implements UserDetailsService {
     private final UserRepository userRepository;
@@ -19,6 +22,11 @@ public class UserService implements UserDetailsService {
         this.userRepository = userRepository;
     }
 
+    /**
+     * Return user details.
+     * @param username is the username from the user search.
+     * @return return details form the user.
+     */
     @Override
     public UserDetails loadUserByUsername(String username) {
 
@@ -29,6 +37,12 @@ public class UserService implements UserDetailsService {
         return user;
     }
 
+    /**
+     * Compare the user password from the request with the passwird in the databse.
+     * @param passwordAuth is the password from the client.
+     * @param passwordBase is the password in the database.
+     * @return a boolean wich is true if password match.
+     */
     public Boolean comparePassword(String passwordAuth, String passwordBase) {
         return passwordAuth.equals(passwordBase);
     }

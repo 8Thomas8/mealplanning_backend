@@ -21,20 +21,36 @@ import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+/**
+ * Security config for spring boot.
+ */
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
+    /**
+     * Api path where there is no verification on CSRF Token.
+     */
     private static final String[] CSRF_IGNORE = {"/api/getToken"};
 
     @Autowired
     UserService userDetailsService;
 
+    /**
+     * Configuration for the authentication manager.
+     * @param auth
+     * @throws Exception
+     */
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(userDetailsService);
     }
 
+    /**
+     * Configuration for spring boot security.
+     * @param http
+     * @throws Exception
+     */
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
@@ -61,6 +77,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                     .anyRequest().authenticated();
     }
 
+    /**
+     * Login success handler.
+     */
     private class AuthentificationLoginSuccessHandler extends SimpleUrlAuthenticationSuccessHandler {
         @Override
         public void onAuthenticationSuccess(HttpServletRequest request,
@@ -71,6 +90,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         }
     }
 
+    /**
+     * Logout succes handler.
+     */
     private class AuthentificationLogoutSuccessHandler extends SimpleUrlLogoutSuccessHandler {
         @Override
         public void onLogoutSuccess(HttpServletRequest request, HttpServletResponse response,

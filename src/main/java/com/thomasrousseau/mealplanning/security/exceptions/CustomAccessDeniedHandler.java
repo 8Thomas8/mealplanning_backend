@@ -12,11 +12,21 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+/**
+ * Custom handler for access denied.
+ */
 @Component
 public class CustomAccessDeniedHandler implements AccessDeniedHandler {
 
     private static Logger logger = LoggerFactory.getLogger(CustomAccessDeniedHandler.class);
 
+    /**
+     * The handler for the access denied.
+     * @param httpServletRequest is the request from the client.
+     * @param httpServletResponse is the response from the server.
+     * @param e
+     * @throws IOException
+     */
     @Override
     public void handle(HttpServletRequest httpServletRequest,
                        HttpServletResponse httpServletResponse,
