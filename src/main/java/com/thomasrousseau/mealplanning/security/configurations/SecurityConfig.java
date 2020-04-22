@@ -73,7 +73,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                     .invalidateHttpSession(true)
                 .and()
                     .authorizeRequests()
-                    .antMatchers("/api/getToken").permitAll()
+                    .antMatchers("/api/getToken", "/api/user/register").permitAll()
                     .anyRequest().authenticated();
     }
 
