@@ -3,6 +3,7 @@ package com.thomasrousseau.mealplanning.controllers;
 import com.thomasrousseau.mealplanning.controllers.base.BaseRestController;
 import com.thomasrousseau.mealplanning.database.repositories.UserRepository;
 import com.thomasrousseau.mealplanning.models.User;
+import com.thomasrousseau.mealplanning.security.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -19,11 +20,14 @@ public class UserController extends BaseRestController<User, Integer> {
     @Autowired
     PasswordEncoder passwordEncoder;
 
+    @Autowired
+    private UserService userService;
+
     public UserController(@Autowired UserRepository repository) {
         super(repository);
     }
 
-    @PostMapping("/register")
+    @PostMapping(value = {"", "/", "/register"})
     public User register(@RequestBody User user) {
         User account = new User();
         account.setUsername(user.getUsername());
