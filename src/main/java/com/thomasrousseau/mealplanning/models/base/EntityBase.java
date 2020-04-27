@@ -19,6 +19,6 @@ public abstract class EntityBase implements ResourceDb<Integer> {
      * The id attribute, for each entity.
      */
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Integer id;
 }
