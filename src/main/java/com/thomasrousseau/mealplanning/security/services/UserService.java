@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Objects;
@@ -21,6 +22,9 @@ public class UserService implements UserDetailsService {
     public UserService(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
+
+    @Autowired
+    public PasswordEncoder passwordEncoder;
 
     /**
      * Return user details.
@@ -38,12 +42,12 @@ public class UserService implements UserDetailsService {
     }
 
     /**
-     * Compare the user password from the request with the passwird in the databse.
+     * Compare the user password from the request with the password in the database.
      * @param passwordAuth is the password from the client.
      * @param passwordBase is the password in the database.
      * @return a boolean wich is true if password match.
      */
     public Boolean comparePassword(String passwordAuth, String passwordBase) {
-        return passwordAuth.equals(passwordBase);
+        return passwordEncoder.matches(passwordAuth, passwordBase);
     }
 }
