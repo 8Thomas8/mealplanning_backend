@@ -9,7 +9,9 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 import javax.persistence.*;
+import java.time.DayOfWeek;
 import java.util.Collection;
+import java.util.Date;
 
 /**
  * Define the Day object.
@@ -25,10 +27,9 @@ public class Day extends EntityBase {
     /**
      * The name of the planning.
      */
-    @Column(name = DayContract.COL_NAME, nullable = false)
-    @JsonProperty(value = DayContract.COL_NAME)
-    @Enumerated(EnumType.STRING)
-    private DayName name;
+    @Column(name = DayContract.COL_DATE, nullable = false)
+    @JsonProperty(value = DayContract.COL_DATE)
+    private Date date;
 
     /**
      * Moments from the association with Moment.
