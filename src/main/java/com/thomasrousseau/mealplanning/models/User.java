@@ -42,7 +42,7 @@ public class User extends EntityBase implements Serializable, UserDetails {
     /**
      * Password of the user.
      */
-    @JsonProperty(value = UserContract.COL_PASSWORD)
+    @JsonProperty(value = UserContract.COL_PASSWORD, access = JsonProperty.Access.WRITE_ONLY)
     @Column(name = UserContract.COL_PASSWORD, nullable = false)
     @JsonIgnore
     private String password;
