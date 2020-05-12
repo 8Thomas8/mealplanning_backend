@@ -6,10 +6,9 @@ import com.thomasrousseau.mealplanning.models.User;
 import com.thomasrousseau.mealplanning.security.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
 
 /**
  * Rest controller for Accompaniment.
@@ -23,6 +22,9 @@ public class UserController extends BaseRestController<User, Integer> {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    UserRepository repository;
+
     public UserController(@Autowired UserRepository repository) {
         super(repository);
     }
@@ -35,5 +37,12 @@ public class UserController extends BaseRestController<User, Integer> {
         account.setRole(user.getRole());
         account.setPassword(passwordEncoder.encode(user.getPassword()));
         return this.save(account);
+    }
+
+    @PutMapping(value = "{id}/update")
+    public User update(@Valid @RequestBody User updatedUser, @PathVariable int id) {
+        User user = this.repository.getOne(id);
+        updatedUser.setPassword(user.getPassword());
+        return this.save(updatedUser);
     }
 }
