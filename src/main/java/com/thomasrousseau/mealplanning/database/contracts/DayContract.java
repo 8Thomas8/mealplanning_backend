@@ -15,7 +15,7 @@ public class DayContract {
     /**
      * The name column name.
      */
-    public static final String COL_NAME = "name";
+    public static final String COL_DATE = "date";
 
     private DayContract() {
     }
