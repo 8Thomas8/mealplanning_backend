@@ -1,7 +1,7 @@
 package com.thomasrousseau.mealplanning.models;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.thomasrousseau.mealplanning.database.contracts.MomentContract;
+import com.thomasrousseau.mealplanning.database.contracts.SlotContract;
 import com.thomasrousseau.mealplanning.models.base.EntityBase;
 import com.thomasrousseau.mealplanning.models.enumerations.MomentName;
 import lombok.AllArgsConstructor;
@@ -10,31 +10,39 @@ import lombok.ToString;
 
 import javax.persistence.*;
 import java.util.Collection;
+import java.util.Date;
 
 /**
- * Define the Moment object.
+ * Define the Day object.
  */
 @Entity
-@Table(name = MomentContract.TABLE)
+@Table(name = SlotContract.TABLE)
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
-@AttributeOverride(name = "id", column = @Column(name = MomentContract.COL_ID))
-public class Moment extends EntityBase {
+@AttributeOverride(name = "id", column = @Column(name = SlotContract.COL_ID))
+public class Slot extends EntityBase {
+
+    /**
+     * The name of the planning.
+     */
+    @Column(name = SlotContract.COL_DATE, nullable = false)
+    @JsonProperty(value = SlotContract.COL_DATE)
+    private Date date;
 
     /**
      * The name of the Moment.
      */
-    @Column(name = MomentContract.COL_NAME, nullable = false)
+    @Column(name = SlotContract.COL_MOMENT_NAME, nullable = false)
     @Enumerated(EnumType.STRING)
-    @JsonProperty(value = MomentContract.COL_NAME)
+    @JsonProperty(value = SlotContract.COL_MOMENT_NAME)
     private MomentName name;
 
     /**
      * The guest number of the Moment.
      */
-    @Column(name = MomentContract.COL_GUEST_NUMBER, nullable = false)
-    @JsonProperty(value = MomentContract.COL_GUEST_NUMBER)
+    @Column(name = SlotContract.COL_GUEST_NUMBER, nullable = false)
+    @JsonProperty(value = SlotContract.COL_GUEST_NUMBER)
     private int guestNumber;
 
     /**

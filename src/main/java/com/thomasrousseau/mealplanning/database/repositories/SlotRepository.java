@@ -1,7 +1,7 @@
 package com.thomasrousseau.mealplanning.database.repositories;
 
-import com.thomasrousseau.mealplanning.models.Day;
+import com.thomasrousseau.mealplanning.models.Slot;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface DayRepository extends JpaRepository<Day, Integer> {
+public interface SlotRepository extends JpaRepository<Slot, Integer> {
 }

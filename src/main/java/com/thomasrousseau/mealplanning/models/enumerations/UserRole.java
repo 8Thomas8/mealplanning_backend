@@ -14,7 +14,6 @@ public enum UserRole {
     ADMIN(0, "Admin"),
     USER(1, "User");
 
-    @NonNull
     private final int value;
 
     @NonNull

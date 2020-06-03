@@ -19,7 +19,6 @@ public enum DayName {
     SAMEDI(5, "Samedi"),
     DIMANCHE(6, "Dimanche");
 
-    @NonNull
     private final int value;
 
     @NonNull
