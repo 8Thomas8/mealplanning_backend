@@ -20,12 +20,12 @@ public class SlotContract {
     /**
      * The name column name.
      */
-    public static final String COL_MOMENT_NAME = "moment_name";
+    public static final String COL_MOMENT_NAME = "momentName";
 
     /**
      * The guest_number column name.
      */
-    public static final String COL_GUEST_NUMBER = "guest_number";
+    public static final String COL_GUEST_NUMBER = "guestNumber";
 
     private SlotContract() {
     }
