@@ -15,7 +15,6 @@ public enum MomentName {
     SOIR(1, "Soir");
 
 
-    @NonNull
     private final int value;
 
     @NonNull

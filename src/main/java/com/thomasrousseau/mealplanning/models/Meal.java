@@ -40,5 +40,5 @@ public class Meal extends EntityBase {
      */
     @OneToMany
     @JsonProperty(value = "meats")
-    private Collection<Meal> meals;
+    private Collection<Meat> meats;
 }

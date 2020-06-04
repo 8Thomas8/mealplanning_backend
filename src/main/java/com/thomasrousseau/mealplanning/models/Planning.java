@@ -31,7 +31,7 @@ public class Planning extends EntityBase {
     /**
      * Days from the association with Day.
      */
-    @JsonProperty(value = "days")
+    @JsonProperty(value = "slots")
     @OneToMany
-    private Collection<Day> days;
+    private Collection<Slot> slots;
 }
