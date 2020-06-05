@@ -29,9 +29,9 @@ public class Planning extends EntityBase {
     private String name;
 
     /**
-     * Days from the association with Day.
+     * Slots from the association with Slot.
      */
     @JsonProperty(value = "slots")
-    @OneToMany
-    private Collection<Slot> slots;
+    @OneToMany(fetch = FetchType.EAGER, cascade=CascadeType.ALL)
+    private Collection<Slot> slot;
 }
