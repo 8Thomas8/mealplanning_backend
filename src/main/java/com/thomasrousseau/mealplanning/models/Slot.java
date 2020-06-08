@@ -13,7 +13,7 @@ import java.util.Collection;
 import java.util.Date;
 
 /**
- * Define the Day object.
+ * Define the Slot object.
  */
 @Entity
 @Table(name = SlotContract.TABLE)
@@ -24,22 +24,22 @@ import java.util.Date;
 public class Slot extends EntityBase {
 
     /**
-     * The name of the planning.
+     * The date of the slot.
      */
     @Column(name = SlotContract.COL_DATE, nullable = false)
     @JsonProperty(value = SlotContract.COL_DATE)
     private Date date;
 
     /**
-     * The name of the Moment.
+     * The name of the slot.
      */
     @Column(name = SlotContract.COL_MOMENT_NAME, nullable = false)
     @Enumerated(EnumType.STRING)
     @JsonProperty(value = SlotContract.COL_MOMENT_NAME)
-    private MomentName name;
+    private MomentName momentName;
 
     /**
-     * The guest number of the Moment.
+     * The guest number of the slot.
      */
     @Column(name = SlotContract.COL_GUEST_NUMBER, nullable = false)
     @JsonProperty(value = SlotContract.COL_GUEST_NUMBER)
